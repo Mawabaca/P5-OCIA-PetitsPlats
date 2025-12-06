@@ -16,6 +16,7 @@ export function RecipeCard({ recipe }) {
           {recipe.time}
         </div>
       </div>
+
       <div className="flex flex-1 flex-col gap-5 px-5 pb-6 pt-5">
         <h3 className="text-lg font-semibold text-slate-900">{recipe.title}</h3>
 
