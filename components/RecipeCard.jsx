@@ -17,28 +17,24 @@ export function RecipeCard({ recipe }) {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-4 px-5 pb-6 pt-5">
+      <div className="flex flex-1 flex-col gap-5 px-5 pb-6 pt-5">
         <h3 className="text-lg font-semibold text-slate-900">{recipe.title}</h3>
 
-        <div className="flex flex-1 flex-col gap-4">
-          <div className="flex flex-1 flex-col overflow-hidden">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Recette</p>
-            <p className="mt-1 flex-1 overflow-auto pr-1 text-sm leading-relaxed text-slate-800">
-              {recipe.description}
-            </p>
-          </div>
+        <div className="space-y-2">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Recette</p>
+          <p className="text-sm leading-relaxed text-slate-800">{recipe.description}</p>
+        </div>
 
-          <div className="flex flex-1 flex-col overflow-hidden">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Ingrédients</p>
-            <dl className="mt-1 grid flex-1 grid-cols-2 gap-x-3 gap-y-2 overflow-auto pr-1 text-sm text-slate-900">
-              {recipe.ingredients.map((ingredient, index) => (
-                <div key={`${recipe.title}-${ingredient.name}-${index}`} className="flex flex-col">
-                  <span className="font-semibold leading-tight">{ingredient.name}</span>
-                  <span className="text-xs text-slate-500 leading-tight">{ingredient.quantity}</span>
-                </div>
-              ))}
-            </dl>
-          </div>
+        <div className="flex flex-1 flex-col gap-3">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Ingrédients</p>
+          <dl className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm text-slate-900">
+            {recipe.ingredients.map((ingredient, index) => (
+              <div key={`${recipe.title}-${ingredient.name}-${index}`} className="flex flex-col">
+                <span className="font-semibold leading-tight">{ingredient.name}</span>
+                <span className="text-xs text-slate-500 leading-tight">{ingredient.quantity}</span>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </article>
