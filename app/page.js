@@ -1,8 +1,15 @@
+import { Manrope } from "next/font/google";
 import { Filters } from "../components/Filters";
 import { Hero } from "../components/Hero";
 import { RecipeCard } from "../components/RecipeCard";
 import { SearchBar } from "../components/SearchBar";
 import { filterOptions, filters, heroImage, recipes } from "../data/recipes";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["500"],
+  display: "swap",
+});
 
 export default function Home() {
   return (
@@ -33,9 +40,15 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="mt-auto bg-black py-6 text-center text-xs font-semibold uppercase tracking-[0.25em] text-white">
-        Copyright 2020 - Les petits plats
+      <footer
+        className={`${manrope.className} mt-auto flex h-[138px] items-center justify-center bg-[#000000] text-center text-[16px] font-medium tracking-[0.08em] text-white`}
+      >
+        Copyright 2025 - Les Petits Plats
       </footer>
     </div>
   );
 }
+
+
+
+

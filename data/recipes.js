@@ -11,6 +11,15 @@ const formatQuantity = (quantity, unit) => {
   return parts.join(" ").trim();
 };
 
+const slugify = (value) =>
+  value
+    ?.toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
 const normalize = (value) => (value ?? "").toString().trim();
 
 const uniqueSorted = (list) =>
@@ -30,6 +39,7 @@ export const recipes = recipesJson.map((recipe) => ({
   })),
   appliance: recipe.appliance,
   ustensils: recipe.ustensils,
+  slug: recipe.slug || slugify(recipe.name),
 }));
 
 export const filterOptions = {

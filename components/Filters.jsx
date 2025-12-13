@@ -83,11 +83,7 @@ export function Filters({ filters, options }) {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d={
-                    openFilter === filter
-                      ? "M6 15l6-6 6 6"
-                      : "M6 9l6 6 6-6"
-                  }
+                  d={openFilter === filter ? "M6 15l6-6 6 6" : "M6 9l6 6 6-6"}
                 />
               </svg>
             </button>
@@ -148,7 +144,7 @@ export function Filters({ filters, options }) {
                           type="button"
                           key={`selected-${option}`}
                           onClick={() => toggleSelection(filter, option)}
-                          className="block w-full px-3 py-2 text-left font-semibold text-slate-900 transition hover:bg-[#ffe18f]"
+                          className="block w-full px-3 py-2 text-left font-semibold text-slate-900"
                         >
                           {option}
                         </button>
@@ -180,11 +176,11 @@ export function Filters({ filters, options }) {
       </div>
 
       {selectedTags.length > 0 && (
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-3">
           {selectedTags.map((tag) => (
             <span
               key={`${tag.filter}-${tag.label}`}
-              className="flex items-center gap-2 rounded-lg bg-[var(--accent)] px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-900"
+              className="flex w-[180px] items-center justify-between gap-2 rounded-[10px] bg-[#FFD15B] px-4 py-3 text-sm font-normal text-slate-900"
             >
               {tag.label}
               <button
@@ -195,7 +191,7 @@ export function Filters({ filters, options }) {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-3.5 w-3.5"
+                  className="h-4 w-4"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
