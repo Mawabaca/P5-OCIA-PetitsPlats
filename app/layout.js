@@ -1,17 +1,10 @@
-import { Bebas_Neue, Poppins } from "next/font/google";
+import { Anton } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-  display: "swap",
-});
-
-const bebas = Bebas_Neue({
-  variable: "--font-bebas",
+const anton = Anton({
   subsets: ["latin"],
   weight: ["400"],
+  variable: "--font-anton",
   display: "swap",
 });
 
@@ -24,9 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
-      <body
-        className={`${poppins.variable} ${bebas.variable} antialiased bg-slate-100 text-slate-900`}
-      >
+      <body className={`${anton.variable} antialiased bg-slate-100 text-slate-900`}>
         {children}
       </body>
     </html>

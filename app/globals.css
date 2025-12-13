@@ -5,7 +5,7 @@
 :root {
   --background: #f3f4f6;
   --foreground: #0f172a;
-  --accent: #ffd15b;
+  --accent: #f3ad39;
 }
 
 * {
@@ -15,12 +15,14 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-poppins), "Poppins", system-ui, -apple-system,
-    sans-serif;
-  letter-spacing: -0.01em;
+  font-family: var(--font-anton), "Anton", system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.02em;
 }
 
 .font-display {
-  font-family: var(--font-bebas), "Bebas Neue", "Arial Black", sans-serif;
-  letter-spacing: 0.06em;
+  font-family: var(--font-anton), "Anton", "Arial Black", sans-serif;
+  letter-spacing: 0.05em;
 }
+
+
+/* Utility for clamping text lines without the Tailwind plugin */

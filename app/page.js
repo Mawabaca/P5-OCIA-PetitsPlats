@@ -2,7 +2,7 @@ import { Filters } from "../components/Filters";
 import { Hero } from "../components/Hero";
 import { RecipeCard } from "../components/RecipeCard";
 import { SearchBar } from "../components/SearchBar";
-import { filters, heroImage, recipes } from "../data/recipes";
+import { filterOptions, filters, heroImage, recipes } from "../data/recipes";
 
 export default function Home() {
   return (
@@ -20,13 +20,13 @@ export default function Home() {
         <SearchBar />
       </Hero>
 
-      <main className="relative z-10 mx-auto w-2/3 pb-16 pt-10">
+      <main className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-16 pt-12">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <Filters filters={filters} />
-          <p className="text-sm font-semibold text-slate-700">50 recettes</p>
+          <Filters filters={filters} options={filterOptions} />
+          <p className="text-[21px] font-normal text-black">50 recettes</p>
         </div>
 
-        <section className="mt-6 grid justify-items-center gap-[15px] sm:grid-cols-2 lg:grid-cols-3">
+        <section className="mt-8 grid justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {recipes.map((recipe) => (
             <RecipeCard key={recipe.title} recipe={recipe} />
           ))}
