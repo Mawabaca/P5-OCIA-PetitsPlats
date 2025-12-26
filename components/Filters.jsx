@@ -9,10 +9,9 @@ const manrope = Manrope({
   display: "swap",
 });
 
-export function Filters({ filters, options }) {
+export function Filters({ filters, options, selected = {}, onSelectionChange }) {
   const [openFilter, setOpenFilter] = useState(null);
   const [queries, setQueries] = useState({});
-  const [selected, setSelected] = useState({});
 
   const toggleFilter = (filter) => {
     setOpenFilter((current) => (current === filter ? null : filter));
@@ -36,15 +35,7 @@ export function Filters({ filters, options }) {
   }, [filters, options, queries, selected]);
 
   const toggleSelection = (filter, option) => {
-    setSelected((prev) => {
-      const current = new Set(prev[filter] || []);
-      if (current.has(option)) {
-        current.delete(option);
-      } else {
-        current.add(option);
-      }
-      return { ...prev, [filter]: Array.from(current) };
-    });
+    onSelectionChange?.(filter, option);
   };
 
   const clearQuery = (filter) => {
@@ -53,7 +44,7 @@ export function Filters({ filters, options }) {
 
   const selectedTags = useMemo(
     () =>
-      Object.entries(selected).flatMap(([filter, items]) =>
+      Object.entries(selected || {}).flatMap(([filter, items]) =>
         (items || []).map((item) => ({ filter, label: item }))
       ),
     [selected]
