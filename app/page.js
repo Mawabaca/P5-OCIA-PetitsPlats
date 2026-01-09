@@ -123,9 +123,9 @@ export default function Home() {
         image={heroImage}
         title={
           <>
-            Decouvrez nos recettes
+            Découvrez nos recettes
             <br />
-            du quotidien, simples et delicieuses
+            du quotidien, simples et délicieuses
           </>
         }
       >
