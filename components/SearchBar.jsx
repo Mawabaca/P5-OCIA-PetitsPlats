@@ -1,10 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
-export function SearchBar() {
-  const [value, setValue] = useState("");
-
+export function SearchBar({ value, onChange }) {
   return (
     <div>
       <label className="sr-only" htmlFor="search">
@@ -14,7 +10,7 @@ export function SearchBar() {
         <input
           id="search"
           value={value}
-          onChange={(event) => setValue(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
           className="flex-1 rounded-[14px] border-0 bg-transparent px-5 py-4 text-base font-medium text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-0"
           placeholder="Rechercher une recette, un ingrédient, ..."
           type="search"
@@ -22,7 +18,7 @@ export function SearchBar() {
         {value && (
           <button
             type="button"
-            onClick={() => setValue("")}
+            onClick={() => onChange("")}
             className="mr-1 flex h-10 w-10 items-center justify-center rounded-full text-slate-400 transition hover:text-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:ring-offset-white"
             aria-label="Effacer la recherche"
           >

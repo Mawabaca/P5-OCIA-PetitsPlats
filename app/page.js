@@ -5,6 +5,7 @@ import { Manrope } from "next/font/google";
 import { Filters } from "../components/Filters";
 import { Hero } from "../components/Hero";
 import { RecipeCard } from "../components/RecipeCard";
+import { SearchBar } from "../components/SearchBar";
 import { filters, heroImage, recipes as allRecipes } from "../data/recipes";
 
 const manrope = Manrope({
@@ -27,6 +28,7 @@ const sortValues = (values) =>
     .sort((a, b) => a.localeCompare(b, "fr", { sensitivity: "base" }));
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState({});
 
   const toggleTag = (filterKey, option) => {
@@ -62,15 +64,37 @@ export default function Home() {
       [filters[2]]: (recipe) => recipe.ustensils,
     };
 
-    return allRecipes.filter((recipe) =>
-      filters.every((filterKey) => {
+    return allRecipes.filter((recipe) => {
+      // Recherche principale (min 3 caractères)
+      if (searchQuery.length >= 3) {
+        const normalizedQuery = normalizeValue(searchQuery);
+
+        // Recherche dans le titre
+        const titleMatch = normalizeValue(recipe.title).includes(normalizedQuery);
+
+        // Recherche dans les ingrédients
+        const ingredientsMatch = recipe.ingredients.some((ingredient) =>
+          normalizeValue(ingredient.name).includes(normalizedQuery)
+        );
+
+        // Recherche dans la description
+        const descriptionMatch = normalizeValue(recipe.description).includes(normalizedQuery);
+
+        // Si aucune correspondance, exclure la recette
+        if (!titleMatch && !ingredientsMatch && !descriptionMatch) {
+          return false;
+        }
+      }
+
+      // Filtres par tags (logique existante)
+      return filters.every((filterKey) => {
         const selectedValues = normalizedSelection[filterKey];
         if (!selectedValues || selectedValues.length === 0) return true;
         const values = (fieldMap[filterKey]?.(recipe) || []).map(normalizeValue);
         return selectedValues.every((value) => values.includes(value));
-      })
-    );
-  }, [normalizedSelection, filters]);
+      });
+    });
+  }, [searchQuery, normalizedSelection, filters]);
 
   const availableOptions = useMemo(() => {
     const ingredients = new Set();
@@ -105,9 +129,7 @@ export default function Home() {
           </>
         }
       >
-        <div className="rounded-[14px] bg-black/50 px-6 py-4 text-base font-medium text-amber-200 backdrop-blur">
-          Utilisez les filtres pour affiner les recettes sans passer par la barre de recherche.
-        </div>
+        <SearchBar value={searchQuery} onChange={setSearchQuery} />
       </Hero>
 
       <main className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-16 pt-12">
